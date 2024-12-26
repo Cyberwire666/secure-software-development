@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($username) || empty($email) || empty($password)) {
         $error_message = "All fields are required.";
+        log_message('ERROR', 'Registration failed: missing fields.');
     } else {
         $stmt = $db->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username, $email);
@@ -18,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->num_rows > 0) {
             $error_message = "Username or email is already taken.";
+            log_message('ERROR', "Registration failed: {$username} or {$email} already exists.");
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
@@ -25,8 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stmt->execute()) {
                 $_SESSION['user_id'] = $stmt->insert_id;
+                log_message('INFO', "New user registered: {$username} with email {$email}");
                 header("Location: login.php");
                 exit();
+            } else {
+                log_message('ERROR', "Database error during registration for username: {$username}");
             }
         }
         $stmt->close();

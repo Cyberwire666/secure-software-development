@@ -4,12 +4,18 @@ require_once '../helpers/log_helper.php';
 // Secret key for signing the token
 $jwt_secret = 'your_secret_key';  // Replace with a strong secret key
 
-// Function to create JWT
+/**
+ * Creates a JWT for user authentication.
+ *
+ * @param int $user_id The user ID.
+ * @param string $username The username.
+ * @return string|false The generated JWT or false on failure.
+ */
 function createJWT($user_id, $username) {
     global $jwt_secret;
 
     if (empty($user_id) || empty($username)) {
-        write_log("JWT Creation Failed: Missing user ID or username.");
+        log_message("ERROR", "JWT Creation Failed: Missing user ID or username.");
         return false;
     }
 
@@ -26,17 +32,23 @@ function createJWT($user_id, $username) {
     $signature = hash_hmac('sha256', "$header.$payload", $jwt_secret, true);
     $signature = base64_encode($signature);
 
+    log_message("INFO", "JWT created successfully for user ID: {$user_id}");
     return "$header.$payload.$signature";
 }
 
-// Function to validate JWT
+/**
+ * Validates a given JWT.
+ *
+ * @param string $token The JWT token.
+ * @return array|false The decoded payload if valid, or false on failure.
+ */
 function validateJWT($token) {
     global $jwt_secret;
 
     $parts = explode('.', $token);
 
     if (count($parts) !== 3) {
-        write_log("Invalid JWT: Incorrect format.");
+        log_message("ERROR", "Invalid JWT: Incorrect format.");
         return false;
     }
 
@@ -46,7 +58,7 @@ function validateJWT($token) {
     $valid_signature = base64_encode(hash_hmac('sha256', "$header.$payload", $jwt_secret, true));
 
     if ($signature !== $valid_signature) {
-        write_log("Invalid JWT: Signature mismatch.");
+        log_message("ERROR", "Invalid JWT: Signature mismatch.");
         return false;
     }
 
@@ -54,10 +66,11 @@ function validateJWT($token) {
     $payload = json_decode(base64_decode($payload), true);
 
     if (!$payload || $payload['exp'] < time()) {
-        write_log("Invalid JWT: Expired or corrupted payload.");
+        log_message("ERROR", "Invalid JWT: Expired or corrupted payload.");
         return false;
     }
 
+    log_message("INFO", "JWT validated successfully for user ID: {$payload['user_id']}");
     return $payload; // Return user data
 }
 ?>

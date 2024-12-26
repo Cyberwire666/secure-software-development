@@ -5,7 +5,7 @@ session_start();
 
 // Log logout event with the user ID
 if (isset($_SESSION['user_id'])) {
-    write_log("User with ID " . $_SESSION['user_id'] . " logged out.");
+    log_message("INFO", "User with ID " . $_SESSION['user_id'] . " logged out.");
 }
 
 // Unset and destroy session

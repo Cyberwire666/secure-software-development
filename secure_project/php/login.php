@@ -2,7 +2,7 @@
 session_start();
 require_once 'db.php';
 require_once 'jwt.php';
-require_once '../helpers/log_helper.php';
+require_once '../helpers/log_helper.php'; // Including the log helper
 
 $otp_expiration = 300;
 
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($username) || empty($password)) {
             $error_message = "Username and password are required.";
-            write_log("Login failed: Empty fields.");
+            log_message("ERROR", "Login failed: Empty fields provided.");
         } else {
             $stmt = $db->prepare("SELECT id, password FROM users WHERE username = ?");
             if ($stmt) {
@@ -26,30 +26,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->fetch();
 
                     if (password_verify($password, $db_password)) {
+                        // OTP generation
                         $_SESSION['otp'] = rand(100000, 999999);
                         $_SESSION['otp_time'] = time();
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['username'] = $username;
-                        write_log("Login successful: OTP generated.");
 
+                        log_message("INFO", "Login successful: User '{$username}' logged in. OTP generated.");
                         header("Location: verify_otp.php");
                         exit;
                     } else {
                         $error_message = "Invalid password.";
+                        log_message("ERROR", "Login failed: Invalid password for username '{$username}'.");
                     }
                 } else {
                     $error_message = "Invalid username or password.";
+                    log_message("ERROR", "Login failed: Invalid username '{$username}'.");
                 }
                 $stmt->close();
+            } else {
+                $error_message = "Database query error.";
+                log_message("ERROR", "Login failed: Database query error during login for username '{$username}'.");
             }
         }
     }
 }
 ?>
 <!-- Login Form HTML -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

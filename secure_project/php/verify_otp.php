@@ -3,23 +3,31 @@ session_start();
 require_once 'jwt.php';
 require_once '../helpers/log_helper.php';
 
+// Check if OTP exists and if it is expired
 if (!isset($_SESSION['otp']) || time() - $_SESSION['otp_time'] > 300) {
-    write_log("OTP expired.");
+    log_message("ERROR", "OTP expired.");
     header("Location: login.php");
     exit();
 }
 
+// Handle OTP verification and JWT creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['otp'] == $_SESSION['otp']) {
+        // OTP is correct, generate the JWT token
         $token = createJWT($_SESSION['user_id'], $_SESSION['username']);
         $_SESSION['token'] = $token;
-        unset($_SESSION['otp'], $_SESSION['otp_time']);
-        write_log("OTP verified. JWT created.");
 
+        // Clear OTP session variables after successful verification
+        unset($_SESSION['otp'], $_SESSION['otp_time']);
+        log_message("INFO", "OTP verified. JWT created.");
+
+        // Redirect to notes page
         header("Location: notes.php");
         exit();
     } else {
+        // Incorrect OTP
         $error_message = "Invalid OTP.";
+        log_message("ERROR", "Invalid OTP entered for user ID: {$_SESSION['user_id']}");
     }
 }
 ?>

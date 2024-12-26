@@ -1,16 +1,28 @@
 <?php
-// Log Helper
 
 /**
- * Write log messages to a log file.
+ * Logs messages to the specified log file.
  *
+ * @param string $level Log level (e.g., INFO, ERROR).
  * @param string $message The log message.
+ * @return void
  */
-function write_log($message) {
-    // Path to the log file
+function log_message($level, $message)
+{
+    // Define the log file path.
     $log_file = __DIR__ . '/../logs/app.log';
-    
-    // Append date, time, and the message to the log file
-    file_put_contents($log_file, date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+    // Ensure the log directory exists.
+    if (!file_exists(dirname($log_file))) {
+        mkdir(dirname($log_file), 0755, true);
+    }
+
+    // Format the log entry.
+    $time_stamp = date('Y-m-d H:i:s');
+    $log_entry = "[{$time_stamp}] {$level}: {$message}\n";
+
+    // Write the log entry to the file.
+    file_put_contents($log_file, $log_entry, FILE_APPEND);
 }
+
 ?>
