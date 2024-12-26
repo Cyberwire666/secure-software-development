@@ -1,98 +1,39 @@
 <?php
-// register.php
-
-// Start the session to track user data
 session_start();
-
-// Include necessary files
 require_once 'db.php';
-require_once '../helpers/log_helper.php'; // Include log helper for logging
+require_once '../helpers/log_helper.php';
 
-// If form is submitted via POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve and sanitize the posted user input
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    try {
-        // Validate and limit the input length to avoid buffer overflow issues
-        if (strlen($username) > 255) {
-            throw new Exception("Username is too long.");
-        }
-        if (strlen($email) > 255) {
-            throw new Exception("Email is too long.");
-        }
-        if (strlen($password) > 255) {
-            throw new Exception("Password is too long.");
-        }
-        if (empty($username) || empty($email) || empty($password)) {
-            throw new Exception("All fields are required.");
-        }
+    if (empty($username) || empty($email) || empty($password)) {
+        $error_message = "All fields are required.";
+    } else {
+        $stmt = $db->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+        $stmt->bind_param("ss", $username, $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-        // Check if username or email already exists
-        $check_user = $db->prepare("SELECT id FROM users WHERE username = ?");
-        $check_email = $db->prepare("SELECT id FROM users WHERE email = ?");
+        if ($stmt->num_rows > 0) {
+            $error_message = "Username or email is already taken.";
+        } else {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $username, $email, $hashed_password);
 
-        if ($check_user === false || $check_email === false) {
-            throw new Exception("Error preparing the query: " . $db->error);
+            if ($stmt->execute()) {
+                $_SESSION['user_id'] = $stmt->insert_id;
+                header("Location: login.php");
+                exit();
+            }
         }
-
-        // Bind and execute username check
-        $check_user->bind_param("s", $username);
-        if (!$check_user->execute()) {
-            throw new Exception("Error executing the username check query: " . $check_user->error);
-        }
-        $check_user->store_result();
-
-        if ($check_user->num_rows > 0) {
-            throw new Exception("Username already taken. Please choose another.");
-        }
-
-        // Bind and execute email check
-        $check_email->bind_param("s", $email);
-        if (!$check_email->execute()) {
-            throw new Exception("Error executing the email check query: " . $check_email->error);
-        }
-        $check_email->store_result();
-
-        if ($check_email->num_rows > 0) {
-            throw new Exception("Email already in use. Please choose another.");
-        }
-
-        // Hash the password
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Insert the new user into the database
-        $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        if ($stmt === false) {
-            throw new Exception("Error preparing the insert query: " . $db->error);
-        }
-        $stmt->bind_param("sss", $username, $email, $hashed_password);
-        if (!$stmt->execute()) {
-            throw new Exception("Error executing the insert query: " . $stmt->error);
-        }
-
-        // Log success and redirect
-        write_log("New user registered successfully: Username = {$username}, ID = {$stmt->insert_id}");
-        $_SESSION['user_id'] = $stmt->insert_id;
-        header("Location: ../index.php");
-        exit();
-
-    } catch (Exception $e) {
-        // Log the error
-        write_log($e->getMessage());
-
-        // Display the error message
-        $error_message = $e->getMessage();
-    } finally {
-        // Close statements if they exist
-        if (isset($check_user)) $check_user->close();
-        if (isset($check_email)) $check_email->close();
-        if (isset($stmt)) $stmt->close();
+        $stmt->close();
     }
 }
 ?>
+<!-- Registration Form HTML -->
 
 <!DOCTYPE html>
 <html lang="en">

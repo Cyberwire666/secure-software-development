@@ -1,38 +1,58 @@
 <?php
-// add_note.php
-
 session_start();
 require_once 'jwt.php'; // Include JWT functions
 
-// Redirect if not logged in
-if (!isset($_SESSION['token'])) {
-    header("Location: login.php");
-    exit();
+// Check if the token is set
+if (!isset($_SESSION['token']) || empty($_SESSION['token'])) {
+    // You can redirect the user to the login page, or display nothing
+    header("Location: login.php");  // Redirect to login or a generic error page
+    exit();  // Exit if the token is not set
 }
 
 // Validate the JWT token
 $userData = validateJWT($_SESSION['token']);
+
+// Check for invalid JWT
 if (!$userData) {
-    header("Location: login.php");
-    exit();
+    // You can redirect the user to the login page here as well
+    header("Location: login.php");  // Redirect to login or a generic error page
+    exit();  // Stop further execution if validation failed
 }
 
-require_once 'db.php';
+require_once 'db.php'; // Database connection
 
+// Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $content = $_POST['content'];
-    $user_id = $userData['user_id'];
+    $content = trim($_POST['content']);  // Sanitize input
+    $user_id = $userData['user_id'];  // Make sure we are getting the user ID
 
-    // Insert new note
-    $stmt = $db->prepare("INSERT INTO notes (user_id, content) VALUES (?, ?)");
-    $stmt->bind_param("is", $user_id, $content);
-    $stmt->execute();
+    // Ensure user_id is not empty before proceeding
+    if (empty($user_id)) {
+        // You can handle the error here silently or redirect if necessary
+        header("Location: login.php");  // Redirect if user_id is missing
+        exit();  // Stop if user_id is empty
+    }
 
-    if ($stmt->affected_rows > 0) {
-        header("Location: notes.php");
-        exit();
+    // Handle empty content
+    if (empty($content)) {
+        $error_message = "Content cannot be empty."; // You could choose to silently handle this or log it
     } else {
-        $error_message = "Failed to add note. Please try again.";
+        // Insert new note
+        $stmt = $db->prepare("INSERT INTO notes (user_id, content) VALUES (?, ?)");
+        if ($stmt === false) {
+            $error_message = "SQL Error: " . $db->error; // Log or silently handle the error
+        } else {
+            $stmt->bind_param("is", $user_id, $content);
+
+            if (!$stmt->execute()) {
+                $error_message = "Failed to add note. Error: " . $stmt->error; // Log or silently handle the error
+            } else {
+                header("Location: notes.php");  // Redirect after success
+                exit();
+            }
+
+            $stmt->close();
+        }
     }
 }
 ?>
@@ -52,10 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" action="add_note.php">
             <label for="content">Note Content</label>
             <textarea name="content" id="content" rows="5" required></textarea>
-
             <button type="submit" class="btn btn-primary">Add Note</button>
         </form>
+
         <a href="notes.php" class="btn btn-secondary">Back to Notes</a>
+
+        <!-- Error message section (if set, display the error message) -->
+        <?php if (isset($error_message)): ?>
+            <div class="error-message"><?php echo $error_message; ?></div>
+        <?php endif; ?>
     </div>
 </body>
 <?php include('../templates/footer.php'); ?>

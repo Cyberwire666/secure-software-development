@@ -1,31 +1,21 @@
 <?php
-// notes.php
-
 session_start();
-require_once 'jwt.php'; // Include JWT functions
-
-// Redirect if not logged in
-if (!isset($_SESSION['token'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Validate the JWT token
-$userData = validateJWT($_SESSION['token']);
-if (!$userData) {
-    header("Location: login.php");
-    exit();
-}
-
+require_once 'jwt.php';
 require_once 'db.php';
 
-// Fetch user's notes
+if (!isset($_SESSION['token']) || !($userData = validateJWT($_SESSION['token']))) {
+    header("Location: login.php");
+    exit();
+}
+
 $user_id = $userData['user_id'];
 $stmt = $db->prepare("SELECT * FROM notes WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+<!-- Notes Management HTML -->
+
 
 <!DOCTYPE html>
 <html lang="en">

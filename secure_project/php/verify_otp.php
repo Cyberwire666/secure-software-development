@@ -1,63 +1,29 @@
 <?php
-// Start session to access session data
 session_start();
-
 require_once 'jwt.php';
-require_once '../helpers/log_helper.php'; // Include log helper for logging
+require_once '../helpers/log_helper.php';
 
-// Ensure OTP exists in session
-if (!isset($_SESSION['otp']) || !isset($_SESSION['otp_time'])) {
-    // Log when OTP is missing
-    write_log("OTP verification failed: OTP not set in session.");
-
-    // Redirect to login if OTP isn't set
+if (!isset($_SESSION['otp']) || time() - $_SESSION['otp_time'] > 300) {
+    write_log("OTP expired.");
     header("Location: login.php");
     exit();
 }
 
-// Check if OTP is expired
-$otp_expiration = 300; // 5 minutes in seconds
-if (time() - $_SESSION['otp_time'] > $otp_expiration) {
-    unset($_SESSION['otp'], $_SESSION['otp_time']); // Clear OTP session
-    $error_message = "OTP expired. Please log in again.";
-
-    // Log when OTP is expired
-    write_log("OTP verification failed: OTP expired for user ID " . $_SESSION['user_id']);
-
-    header("Location: login.php?error=" . urlencode($error_message));
-    exit();
-}
-
-// Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve OTP from user input
-    $user_otp = trim($_POST['otp']);
-
-    // Log OTP submission attempt
-    write_log("OTP verification attempt for user ID " . $_SESSION['user_id']);
-
-    // Validate OTP
-    if ($user_otp == $_SESSION['otp']) {
-        // OTP is correct, allow login
-        $token = createJWT(['user_id' => $_SESSION['user_id'], 'username' => $_SESSION['username']]);
+    if ($_POST['otp'] == $_SESSION['otp']) {
+        $token = createJWT($_SESSION['user_id'], $_SESSION['username']);
         $_SESSION['token'] = $token;
-
-        // Clear OTP session variables after successful verification
         unset($_SESSION['otp'], $_SESSION['otp_time']);
+        write_log("OTP verified. JWT created.");
 
-        // Log successful OTP verification
-        write_log("OTP verification succeeded for user ID " . $_SESSION['user_id']);
-
-        header("Location: notes.php"); // Redirect to notes page
+        header("Location: notes.php");
         exit();
     } else {
-        $error_message = "Invalid OTP. Please try again.";
-
-        // Log failed OTP verification attempt
-        write_log("OTP verification failed: Invalid OTP for user ID " . $_SESSION['user_id']);
+        $error_message = "Invalid OTP.";
     }
 }
 ?>
+<!-- OTP Verification Form HTML -->
 
 <!DOCTYPE html>
 <html lang="en">

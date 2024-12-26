@@ -1,59 +1,63 @@
 <?php
-// Include the log helper to enable logging functionality
 require_once '../helpers/log_helper.php';
 
 // Secret key for signing the token
-$jwt_secret = 'your_secret_key';
+$jwt_secret = 'your_secret_key';  // Replace with a strong secret key
 
 // Function to create JWT
-function createJWT($payload) {
+function createJWT($user_id, $username) {
     global $jwt_secret;
-    $header = json_encode(['alg' => 'HS256', 'typ' => 'JWT']);
-    $payload = json_encode($payload);
 
-    // Create base64Url encoded header and payload
-    $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
-    $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+    if (empty($user_id) || empty($username)) {
+        write_log("JWT Creation Failed: Missing user ID or username.");
+        return false;
+    }
 
-    // Create the signature
-    $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, $jwt_secret, true);
-    $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+    // Header and payload
+    $header = base64_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
+    $payload = base64_encode(json_encode([
+        'user_id' => $user_id,
+        'username' => $username,
+        'iat' => time(),
+        'exp' => time() + 3600 // Token expires in 1 hour
+    ]));
 
-    // Construct the JWT token
-    $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+    // Signature
+    $signature = hash_hmac('sha256', "$header.$payload", $jwt_secret, true);
+    $signature = base64_encode($signature);
 
-    // Log JWT creation action
-    write_log("JWT Created: Payload - " . json_encode($payload) . ", Token: $jwt");
-
-    return $jwt;
+    return "$header.$payload.$signature";
 }
 
 // Function to validate JWT
 function validateJWT($token) {
     global $jwt_secret;
 
-    // Split the token into parts
     $parts = explode('.', $token);
+
     if (count($parts) !== 3) {
-        // Log failed validation attempt
-        write_log("JWT Validation Failed: Invalid Token Structure - $token");
+        write_log("Invalid JWT: Incorrect format.");
         return false;
     }
 
-    list($header, $payload, $signature) = $parts;
+    [$header, $payload, $signature] = $parts;
 
-    // Validate the signature
-    $validSignature = hash_hmac('sha256', "$header.$payload", $jwt_secret, true);
-    $validBase64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($validSignature));
+    // Recalculate signature
+    $valid_signature = base64_encode(hash_hmac('sha256', "$header.$payload", $jwt_secret, true));
 
-    if ($signature === $validBase64UrlSignature) {
-        // Log successful validation
-        write_log("JWT Validated: Payload - " . base64_decode($payload));
-        return json_decode(base64_decode($payload), true);
+    if ($signature !== $valid_signature) {
+        write_log("Invalid JWT: Signature mismatch.");
+        return false;
     }
 
-    // Log failed validation
-    write_log("JWT Validation Failed: Invalid Signature - $token");
-    return false;
+    // Decode payload
+    $payload = json_decode(base64_decode($payload), true);
+
+    if (!$payload || $payload['exp'] < time()) {
+        write_log("Invalid JWT: Expired or corrupted payload.");
+        return false;
+    }
+
+    return $payload; // Return user data
 }
 ?>
