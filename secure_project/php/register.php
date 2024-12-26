@@ -14,14 +14,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    // Simple form validation to ensure fields are not empty
-    if (empty($username) || empty($email) || empty($password)) {
+    // Validate and limit the input length to avoid buffer overflow issues
+    if (strlen($username) > 255) {
+        $error_message = "Username is too long.";
+    } elseif (strlen($email) > 255) {
+        $error_message = "Email is too long.";
+    } elseif (strlen($password) > 255) {
+        $error_message = "Password is too long.";
+    } elseif (empty($username) || empty($email) || empty($password)) {
         $error_message = "All fields are required.";
     } else {
         // Prepare the SQL query to check if the username already exists in the database
         $check_user = $db->prepare("SELECT id FROM users WHERE username = ?");
         $check_email = $db->prepare("SELECT id FROM users WHERE email = ?");
-        
+
         if ($check_user === false || $check_email === false) {
             $error_message = "Error preparing the query: " . $db->error; // Handle statement preparation failure
         } else {
@@ -51,10 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($check_email->num_rows > 0) {
                             $error_message = "Email already in use. Please choose another.";
                         } else {
-                            // Hash the password before storing it in the database for better security
+                            // Hash the password before storing it in the database
                             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                            // SQL Injection Mitigation 
                             // Prepare the SQL query to insert a new user into the database
                             $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
                             
@@ -87,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>

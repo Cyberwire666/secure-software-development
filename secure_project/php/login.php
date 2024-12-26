@@ -10,12 +10,16 @@ require_once 'jwt.php'; // Include functions for generating JWT tokens
 
 // Check if the form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve input data from the POST request
+    // Retrieve input data from the POST request and sanitize it
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     
-    // Simple form validation to ensure fields are not empty
-    if (empty($username) || empty($password)) {
+    // Validate and limit the input length to avoid buffer overflow issues
+    if (strlen($username) > 255) {
+        $error_message = "Username is too long.";
+    } elseif (strlen($password) > 255) {
+        $error_message = "Password is too long.";
+    } elseif (empty($username) || empty($password)) {
         $error_message = "Username and password cannot be empty.";
     } else {
         // Prepare the SQL query to check if the user exists in the database
@@ -31,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $stmt->store_result(); // Store the result to check if a matching user exists
                 
-                // If a matching user is found
                 if ($stmt->num_rows > 0) {
                     $stmt->bind_result($user_id, $db_password); // Retrieve user ID and password from database
                     $stmt->fetch(); // Fetch the data
@@ -47,11 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         header("Location: notes.php");
                         exit(); // Stop further script execution
                     } else {
-                        // If password verification fails, show an error message
                         $error_message = "Invalid username or password.";
                     }
                 } else {
-                    // If no matching user is found, show an error message
                     $error_message = "User not found.";
                 }
             }
@@ -61,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
