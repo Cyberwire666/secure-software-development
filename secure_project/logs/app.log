@@ -1,0 +1,42 @@
+2024-12-26 17:18:02 - Database connection successful.
+2024-12-26 17:18:03 - Database connection successful.
+2024-12-26 17:18:07 - Database connection successful.
+2024-12-26 17:28:22 - Database connection successful.
+2024-12-26 17:28:40 - Database connection successful.
+2024-12-26 17:28:40 - New user registered successfully: Username = user3, ID = 9
+2024-12-26 17:28:46 - Database connection successful.
+2024-12-26 17:28:51 - Database connection successful.
+2024-12-26 17:28:51 - OTP generated for username: user3.
+2024-12-26 17:28:51 - Redirecting to OTP verification for username: user3.
+2024-12-26 17:28:57 - Database connection successful.
+2024-12-26 17:29:18 - Database connection successful.
+2024-12-26 17:29:22 - Database connection successful.
+2024-12-26 17:29:22 - OTP generated for username: user3.
+2024-12-26 17:29:22 - Redirecting to OTP verification for username: user3.
+2024-12-26 17:29:33 - OTP verification attempt for user ID 9
+2024-12-26 17:29:33 - JWT Created: Payload - "{\"user_id\":9,\"username\":null}", Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJ1c2VybmFtZSI6bnVsbH0.MiIMPMrgLFczo0Gc_CqqLb0MV5QZaVn-Lf12PizbruA
+2024-12-26 17:29:33 - OTP verification succeeded for user ID 9
+2024-12-26 17:29:33 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:29:33 - Database connection successful.
+2024-12-26 17:30:18 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:18 - Database connection successful.
+2024-12-26 17:30:23 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:23 - Database connection successful.
+2024-12-26 17:30:23 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:23 - Database connection successful.
+2024-12-26 17:30:24 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:24 - Database connection successful.
+2024-12-26 17:30:26 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:26 - Database connection successful.
+2024-12-26 17:30:26 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:26 - Database connection successful.
+2024-12-26 17:30:28 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:28 - Database connection successful.
+2024-12-26 17:30:28 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:28 - Database connection successful.
+2024-12-26 17:30:32 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:32 - Database connection successful.
+2024-12-26 17:30:51 - JWT Validated: Payload - {"user_id":9,"username":null}
+2024-12-26 17:30:51 - Database connection successful.
+2024-12-26 17:30:52 - User with ID 9 logged out.
+2024-12-26 17:30:52 - Database connection successful.
