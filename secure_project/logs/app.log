@@ -88,3 +88,124 @@
 [2024-12-26 23:26:58] INFO: Database connection successful.
 [2024-12-26 23:26:58] INFO: JWT validated successfully for user ID: 16
 [2024-12-26 23:27:11] INFO: Database connection successful.
+[2024-12-27 22:25:59] INFO: Database connection successful.
+[2024-12-27 22:26:13] INFO: Database connection successful.
+[2024-12-27 22:26:13] INFO: New user registered: user1 with email user1@mail.com
+[2024-12-27 22:26:14] INFO: Database connection successful.
+[2024-12-27 22:26:31] INFO: Database connection successful.
+[2024-12-27 22:26:31] INFO: Login successful: User 'user1' logged in. OTP generated.
+[2024-12-27 22:26:35] INFO: JWT created successfully for user ID: 19
+[2024-12-27 22:26:35] INFO: OTP verified. JWT created.
+[2024-12-27 22:26:35] INFO: Database connection successful.
+[2024-12-27 22:26:35] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:26:39] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:26:39] INFO: Database connection successful.
+[2024-12-27 22:27:30] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:27:30] INFO: Database connection successful.
+[2024-12-27 22:27:30] INFO: Database connection successful.
+[2024-12-27 22:27:30] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:27:32] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:27:32] INFO: Database connection successful.
+[2024-12-27 22:27:33] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:27:33] INFO: Database connection successful.
+[2024-12-27 22:27:33] INFO: Database connection successful.
+[2024-12-27 22:27:33] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:28:16] INFO: Database connection successful.
+[2024-12-27 22:28:16] INFO: JWT validated successfully for user ID: 19
+[2024-12-27 22:28:18] INFO: User with ID 19 logged out.
+[2024-12-27 22:28:18] INFO: Database connection successful.
+[2024-12-27 22:30:21] INFO: Database connection successful.
+[2024-12-27 22:30:37] INFO: Database connection successful.
+[2024-12-27 22:35:05] INFO: Database connection successful.
+[2024-12-27 22:42:44] ERROR: Database connection failed: No connection could be made because the target machine actively refused it
+[2024-12-27 22:43:02] ERROR: Database connection failed: No connection could be made because the target machine actively refused it
+[2024-12-27 22:43:08] ERROR: Database connection failed: No connection could be made because the target machine actively refused it
+[2024-12-27 22:43:17] INFO: Database connection successful.
+[2024-12-27 22:43:29] INFO: Database connection successful.
+[2024-12-27 22:43:29] INFO: New user registered: y    ehia with email yehia@example.com
+[2024-12-27 22:43:29] INFO: Database connection successful.
+[2024-12-27 22:43:48] INFO: Database connection successful.
+[2024-12-27 22:46:53] INFO: Database connection successful.
+[2024-12-27 22:47:44] INFO: Database connection successful.
+[2024-12-27 22:47:44] ERROR: Login failed: Invalid username '" or ""=" "'.
+[2024-12-27 22:49:00] INFO: Database connection successful.
+[2024-12-27 22:53:57] INFO: Database connection successful.
+[2024-12-27 23:35:54] INFO: Database connection successful.
+[2024-12-27 23:35:54] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-27 23:38:07] ERROR: Invalid OTP entered for user ID: 16
+[2024-12-27 23:38:11] INFO: Database connection successful.
+[2024-12-27 23:38:13] INFO: Database connection successful.
+[2024-12-27 23:38:48] INFO: Database connection successful.
+[2024-12-27 23:38:48] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-27 23:41:47] INFO: JWT created successfully for user ID: 16
+[2024-12-27 23:41:47] INFO: OTP verified. JWT created.
+[2024-12-27 23:41:47] INFO: Database connection successful.
+[2024-12-27 23:41:47] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:41:50] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:41:50] INFO: Database connection successful.
+[2024-12-27 23:41:55] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:41:55] INFO: Database connection successful.
+[2024-12-27 23:41:55] INFO: Database connection successful.
+[2024-12-27 23:41:55] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:42:26] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:42:26] INFO: Database connection successful.
+[2024-12-27 23:42:33] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:42:33] INFO: Database connection successful.
+[2024-12-27 23:42:33] INFO: Database connection successful.
+[2024-12-27 23:42:33] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:51:06] INFO: JWT validated successfully for user ID: 16
+[2024-12-27 23:51:06] INFO: Database connection successful.
+[2024-12-28 00:02:16] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:16] INFO: Database connection successful.
+[2024-12-28 00:02:28] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:28] INFO: Database connection successful.
+[2024-12-28 00:02:30] INFO: Database connection successful.
+[2024-12-28 00:02:30] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:32] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:32] INFO: Database connection successful.
+[2024-12-28 00:02:33] INFO: Database connection successful.
+[2024-12-28 00:02:33] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:34] INFO: Database connection successful.
+[2024-12-28 00:02:34] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:35] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:35] INFO: Database connection successful.
+[2024-12-28 00:02:39] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:39] INFO: Database connection successful.
+[2024-12-28 00:02:39] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:39] INFO: Database connection successful.
+[2024-12-28 00:02:39] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:02:39] INFO: Database connection successful.
+[2024-12-28 00:02:40] INFO: Database connection successful.
+[2024-12-28 00:02:40] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 00:05:17] INFO: User with ID 16 logged out.
+[2024-12-28 00:05:17] INFO: Database connection successful.
+[2024-12-28 00:07:31] INFO: Database connection successful.
+[2024-12-28 00:15:08] INFO: Database connection successful.
+[2024-12-28 00:15:44] INFO: Database connection successful.
+[2024-12-28 00:15:44] INFO: New user registered: u with email u@mail.com
+[2024-12-28 00:15:44] INFO: Database connection successful.
+[2024-12-28 00:15:48] INFO: Database connection successful.
+[2024-12-28 00:15:48] INFO: Login successful: User 'u' logged in. OTP generated.
+[2024-12-28 00:15:50] INFO: JWT created successfully for user ID: 21
+[2024-12-28 00:15:50] INFO: OTP verified. JWT created.
+[2024-12-28 00:15:50] INFO: Database connection successful.
+[2024-12-28 00:15:50] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:51] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:51] INFO: Database connection successful.
+[2024-12-28 00:15:53] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:53] INFO: Database connection successful.
+[2024-12-28 00:15:53] INFO: Database connection successful.
+[2024-12-28 00:15:53] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:54] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:54] INFO: Database connection successful.
+[2024-12-28 00:15:56] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:56] INFO: Database connection successful.
+[2024-12-28 00:15:56] INFO: Database connection successful.
+[2024-12-28 00:15:56] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:59] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:15:59] INFO: Database connection successful.
+[2024-12-28 00:15:59] INFO: Database connection successful.
+[2024-12-28 00:15:59] INFO: JWT validated successfully for user ID: 21
+[2024-12-28 00:16:01] INFO: User with ID 21 logged out.
+[2024-12-28 00:16:01] INFO: Database connection successful.
+[2024-12-28 00:16:04] INFO: Database connection successful.
