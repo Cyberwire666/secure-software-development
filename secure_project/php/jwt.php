@@ -3,7 +3,7 @@
 require_once '../helpers/log_helper.php';
 
 // Secret key for signing the token
-$jwt_secret = 'your_secret_key';  // Replace with a strong secret key to protect JWT integrity
+$jwt_secret = '638103891';  // Replace with a strong secret key to protect JWT integrity
 
 /**
  * Creates a JWT for user authentication.

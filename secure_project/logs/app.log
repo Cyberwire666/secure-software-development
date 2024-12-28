@@ -209,3 +209,85 @@
 [2024-12-28 00:16:01] INFO: User with ID 21 logged out.
 [2024-12-28 00:16:01] INFO: Database connection successful.
 [2024-12-28 00:16:04] INFO: Database connection successful.
+[2024-12-28 03:01:59] INFO: Database connection successful.
+[2024-12-28 03:02:01] INFO: Database connection successful.
+[2024-12-28 03:02:01] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 03:02:04] INFO: JWT created successfully for user ID: 16
+[2024-12-28 03:02:04] INFO: OTP verified. JWT created.
+[2024-12-28 03:02:04] INFO: Database connection successful.
+[2024-12-28 03:02:04] ERROR: Invalid JWT: Signature mismatch.
+[2024-12-28 03:02:04] INFO: Database connection successful.
+[2024-12-28 03:02:22] INFO: Database connection successful.
+[2024-12-28 03:02:23] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 03:02:26] INFO: JWT created successfully for user ID: 16
+[2024-12-28 03:02:26] INFO: OTP verified. JWT created.
+[2024-12-28 03:02:26] INFO: Database connection successful.
+[2024-12-28 03:02:26] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:19] INFO: User with ID 16 logged out.
+[2024-12-28 03:04:19] INFO: Database connection successful.
+[2024-12-28 03:04:21] INFO: Database connection successful.
+[2024-12-28 03:04:21] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 03:04:23] INFO: JWT created successfully for user ID: 16
+[2024-12-28 03:04:23] INFO: OTP verified. JWT created.
+[2024-12-28 03:04:24] INFO: Database connection successful.
+[2024-12-28 03:04:24] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:25] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:25] INFO: Database connection successful.
+[2024-12-28 03:04:27] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:27] INFO: Database connection successful.
+[2024-12-28 03:04:29] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:29] INFO: Database connection successful.
+[2024-12-28 03:04:29] INFO: Database connection successful.
+[2024-12-28 03:04:29] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:34] INFO: Database connection successful.
+[2024-12-28 03:04:34] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 03:04:35] INFO: User with ID 16 logged out.
+[2024-12-28 03:04:35] INFO: Database connection successful.
+[2024-12-28 03:05:13] INFO: Database connection successful.
+[2024-12-28 03:05:13] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 03:05:16] INFO: JWT created successfully for user ID: 16
+[2024-12-28 03:05:16] INFO: OTP verified. JWT created.
+[2024-12-28 03:05:16] INFO: Database connection successful.
+[2024-12-28 03:05:16] ERROR: Invalid JWT: Signature mismatch.
+[2024-12-28 03:05:16] INFO: Database connection successful.
+[2024-12-28 03:06:39] INFO: Database connection successful.
+[2024-12-28 03:06:39] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 03:06:44] INFO: JWT created successfully for user ID: 16
+[2024-12-28 03:06:44] INFO: OTP verified. JWT created.
+[2024-12-28 03:06:44] INFO: Database connection successful.
+[2024-12-28 03:06:44] ERROR: Invalid JWT: Signature mismatch.
+[2024-12-28 03:06:44] INFO: Database connection successful.
+[2024-12-28 03:07:06] INFO: Database connection successful.
+[2024-12-28 03:07:06] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 03:07:10] INFO: JWT created successfully for user ID: 16
+[2024-12-28 03:07:10] INFO: OTP verified. JWT created.
+[2024-12-28 03:07:10] INFO: Database connection successful.
+[2024-12-28 03:07:10] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 10:59:31] INFO: Database connection successful.
+[2024-12-28 10:59:36] INFO: Database connection successful.
+[2024-12-28 10:59:37] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 10:59:39] INFO: Database connection successful.
+[2024-12-28 11:00:15] INFO: Database connection successful.
+[2024-12-28 11:01:00] INFO: Database connection successful.
+[2024-12-28 11:01:10] INFO: Database connection successful.
+[2024-12-28 11:01:10] error: Username is too long.
+[2024-12-28 11:01:51] INFO: Database connection successful.
+[2024-12-28 11:01:52] INFO: Login successful: User 'yehia' logged in. OTP generated.
+[2024-12-28 11:01:55] INFO: JWT created successfully for user ID: 16
+[2024-12-28 11:01:55] INFO: OTP verified. JWT created.
+[2024-12-28 11:01:55] INFO: Database connection successful.
+[2024-12-28 11:01:55] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:01:59] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:01:59] INFO: Database connection successful.
+[2024-12-28 11:02:03] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:02:03] INFO: Database connection successful.
+[2024-12-28 11:02:03] INFO: Database connection successful.
+[2024-12-28 11:02:03] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:02:06] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:02:06] INFO: Database connection successful.
+[2024-12-28 11:02:06] INFO: Database connection successful.
+[2024-12-28 11:02:06] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:02:19] INFO: Database connection successful.
+[2024-12-28 11:02:19] INFO: JWT validated successfully for user ID: 16
+[2024-12-28 11:02:21] INFO: User with ID 16 logged out.
+[2024-12-28 11:02:21] INFO: Database connection successful.

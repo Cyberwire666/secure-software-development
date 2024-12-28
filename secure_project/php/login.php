@@ -18,10 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = trim($_POST['username']); // Trim whitespace from username
         $password = trim($_POST['password']); // Trim whitespace from password
 
-        // Validate that both username and password are not empty
-        if (empty($username) || empty($password)) {
-            $error_message = "Username and password are required."; // Error message if fields are empty
-            log_message("ERROR", "Login failed: Empty fields provided."); // Log the error
+        if (strlen($username) > 255) {
+            $error_message = "Username is too long.";
+            log_message("error", $error_message);
+        } elseif (strlen($password) > 255) {
+            $error_message = "Password is too long.";
+            log_message("error", $error_message);
+        } elseif (empty($username) || empty($password)) {
+            $error_message = "Username and password cannot be empty.";
+            log_message("error", $error_message);
         } else {
             // Prepare the SQL query to retrieve user data from the database by username
             $stmt = $db->prepare("SELECT id, password FROM users WHERE username = ?");

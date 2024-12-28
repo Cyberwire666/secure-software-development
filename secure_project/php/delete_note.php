@@ -11,7 +11,6 @@ if (!isset($_SESSION['token'])) {
     header("Location: login.php");  // Redirect to the login page
     exit();  // Stop further execution as user is not authenticated
 }
-
 // Validate the JWT token to ensure the user is authorized
 $userData = validateJWT($_SESSION['token']);  // Decodes and checks token for validity
 
